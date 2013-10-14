@@ -1,0 +1,3 @@
+[submodule "lib/property"]
+	path = lib/property
+	url = git@github.com:thehogfather/property.git
