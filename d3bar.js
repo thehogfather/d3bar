@@ -9,6 +9,15 @@
 (function () {
     "use strict";
     var pad = 50;
+    function property(v) {
+        var p = function (_) {
+            if (!arguments.length) {
+                return v;
+            }
+            return this;
+        };
+        return p;
+    }
     /**
         Data can be a 2d array. If this is the case, then each child array represents a dataset for the bar chart
     */
@@ -185,9 +194,10 @@
             }
 
             //render labels
-            vis.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+            vis.append("g").attr("transform", "translate(" + margin.left + ")")
                 .append("text")
-                .text(bar.label()).attr("x", bar.width() / 2).attr("class", "chartlabel");
+                .text(bar.label()).attr("x", bar.width() / 2).attr("class", "chartlabel")
+				.style("alignment-baseline", "text-before-edge").style("text-anchor", "middle");
             vis.append("g").attr("transform", "translate(" + margin.left + "," + (bar.height() + margin.top + margin.bottom / 2) + ")")
                 .append("text").text(bar.xlabel()).style("text-anchor", "middle").style("alignment-baseline", "text-after-edge")
                 .attr("class", "axislabel").attr("x", bar.width() / 2);
